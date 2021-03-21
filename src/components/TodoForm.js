@@ -16,15 +16,17 @@ function TodoForm(props) {
     }
 
     return (
-        <div>
-            <form id="todo-form" onSubmit={onSumbit}>
+        <div className="todolistform">
+            <form id="todo-form" 
+                className="form-container" onSubmit={onSumbit}>
                 <input 
+                className="todo-input"
                     type="text" 
                     value={todoInput} 
                     placeholder='Enter your todo list'
                     onChange={(e) => setTodoInput(e.target.value)}
                     />
-                <button>Add Todo</button>
+                <button className="todo-button">Add Todo</button>
             </form>
             
         </div>

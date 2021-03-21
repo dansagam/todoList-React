@@ -8,10 +8,20 @@ function TodoList(props) {
     return (
         <div>
             <ul>
-                {todoData.map(todo => (
-                    // console.log(`fountain ${todo.todoInput}`)
-                    <Todo key={todo.id} todo={todo} onDelete={props.onDelete} />
-                ))}
+                {todoData.map( (todo, index) => (
+                    <div 
+                        className={ todo.isComplete  ? 'complete' : ''} 
+                        key={index} >
+                        <Todo 
+                            key={todo.id} 
+                            todo={todo} 
+                            onDelete={props.onDelete} 
+                            completeTodo={props.onCompleted} 
+                            updateTodo={props.updateTodos}/>
+                            
+                  
+                    </div>
+                    ))}
                 
             </ul>
         </div>
