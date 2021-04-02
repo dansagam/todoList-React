@@ -19,8 +19,6 @@ function TodoList(props) {
                             /**onDelete={props.onDelete}*/ 
                             completeTodo={props.onCompleted} 
                             updateTodo={props.updateTodos}/>
-                            
-                  
                     </div>
                     ))}
                 
