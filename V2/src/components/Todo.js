@@ -1,11 +1,13 @@
-import React,{useState} from 'react'
+import React,{useState, useContext} from 'react'
 import  {FaEdit, FaTrash}  from 'react-icons/fa'
+import { GlobalContext } from '../context/GlobalState';
 import TodoForm from './TodoForm';
 
 
 
 
 function Todo(props) {
+    const {deleteTodo} = useContext(GlobalContext);
     // console.log(`this test ${props.todo}`)
     const [edit, setEdit] = useState({
         id: null,
@@ -29,7 +31,7 @@ function Todo(props) {
             <div className="icons">
                 <FaTrash className="todo-row-delete" 
                     style={{color: 'red', cursor: 'pointer' }} 
-                    onDoubleClick={() => props.onDelete(props.todo.id)}
+                    onDoubleClick={() => deleteTodo(props.todo.id)}
                 /> 
                 <FaEdit 
                     onClick={() => setEdit({

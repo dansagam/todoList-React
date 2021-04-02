@@ -1,21 +1,22 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { GlobalContext } from '../context/GlobalState';
 import Todo from './Todo'
 
 
 function TodoList(props) {
-    // console.log(`todolist test ${props.todos}`)
-    const todoData = props.todos;
+    const {todos} = useContext(GlobalContext)
+    
     return (
         <div>
             <ul>
-                {todoData.map( (todo, index) => (
+                {todos.map( (todo, index) => (
                     <div 
                         className={ todo.isComplete  ? 'complete' : ''} 
                         key={index} >
                         <Todo 
                             key={todo.id} 
                             todo={todo} 
-                            onDelete={props.onDelete} 
+                            /**onDelete={props.onDelete}*/ 
                             completeTodo={props.onCompleted} 
                             updateTodo={props.updateTodos}/>
                             

@@ -1,17 +1,20 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { GlobalContext } from '../context/GlobalState';
 
 function TodoForm(props) {
+    const {addTodo }= useContext(GlobalContext)
     const [todoInput, setTodoInput] = useState('');
+    // eslint-disable-next-line no-unused-vars
     
     const onSumbit = (e) => {
         e.preventDefault()
 
-        const addTodo = {
+        const newTodo = {
             id: Math.floor(Math.random() * 1000000 ),
             todoInput,
         }
         // console.log(addTodo)
-        props.onAdd(addTodo)
+        addTodo(newTodo)
         setTodoInput('')
     }
 
