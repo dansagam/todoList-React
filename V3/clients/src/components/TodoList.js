@@ -1,10 +1,15 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { GlobalContext } from '../context/GlobalState';
 import Todo from './Todo'
 
 
 function TodoList(props) {
-    const {todos} = useContext(GlobalContext)
+    
+    const { todos, getTodo} = useContext(GlobalContext)
+    useEffect(() => {
+        getTodo()
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     
     return (
         <div>
@@ -14,7 +19,7 @@ function TodoList(props) {
                         className={ todo.isComplete  ? 'complete' : ''} 
                         key={index} >
                         <Todo 
-                            key={todo.id} 
+                            key={todo._id} 
                             todo={todo} 
                             /**onDelete={props.onDelete}*/ 
                             completeTodo={props.onCompleted} 

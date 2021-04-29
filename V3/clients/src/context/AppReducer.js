@@ -1,6 +1,15 @@
 
 function AppReducer (state, action) {
     switch(action.type) {
+        case 'GET_TODO':
+            return {
+                ...state,
+                loading: false,
+                todos: action.payload
+
+            }
+            // return `dsdd${
+            //     console.log(action.type)}`
         case 'DELETE_TODO':
             return {
                 ...state,
@@ -9,7 +18,7 @@ function AppReducer (state, action) {
         case 'ADD_TODO':
             return {
                 ...state,
-                todos: [action.payload, ...state.todos]
+                todos: [...state.todos, action.payload]
             }
             default:
                 return state 

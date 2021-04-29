@@ -25,13 +25,12 @@ function Todo(props) {
         return <TodoForm edit={edit} onAdd={submitUpdate} />
     }
     return (
-        <li
-            className='todo-row'  onClick={() => props.completeTodo(props.todo.id)}>
-            {props.todo.todoInput} 
+        <li className='todo-row'  onClick={() => props.completeTodo(props.todo._id)}>
+            {props.todo.text} 
             <div className="icons">
                 <FaTrash className="todo-row-delete" 
                     style={{color: 'red', cursor: 'pointer' }} 
-                    onDoubleClick={() => deleteTodo(props.todo.id)}
+                    onDoubleClick={() => deleteTodo(props.todo._id)}
                 /> 
                 <FaEdit 
                     onClick={() => setEdit({

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 
 const seedDB = async = () => {
@@ -15,3 +15,4 @@ const seedDB = async = () => {
     });
 
 }
+module.exports = seedDB;

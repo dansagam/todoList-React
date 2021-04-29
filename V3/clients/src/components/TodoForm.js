@@ -3,19 +3,19 @@ import { GlobalContext } from '../context/GlobalState';
 
 function TodoForm(props) {
     const {addTodo }= useContext(GlobalContext)
-    const [todoInput, setTodoInput] = useState('');
+    const [text, setText] = useState('');
     // eslint-disable-next-line no-unused-vars
     
     const onSumbit = (e) => {
         e.preventDefault()
 
         const newTodo = {
-            id: Math.floor(Math.random() * 1000000 ),
-            todoInput,
+            // id: Math.floor(Math.random() * 1000000 ),
+            text,
         }
         // console.log(addTodo)
         addTodo(newTodo)
-        setTodoInput('')
+        setText('')
     }
 
     return (
@@ -25,9 +25,9 @@ function TodoForm(props) {
                 <input 
                 className="todo-input"
                     type="text" 
-                    value={todoInput} 
+                    value={text} 
                     placeholder='Enter your todo list'
-                    onChange={(e) => setTodoInput(e.target.value)}
+                    onChange={(e) => setText(e.target.value)}
                     />
                 <button className="todo-button">Add Todo</button>
             </form>

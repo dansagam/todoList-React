@@ -1,28 +1,65 @@
 import React, {createContext, useReducer} from 'react'
 import AppReducer from './AppReducer'
+import axios    from 'axios'
 
 const initialState =  {
-    todos: [
-        {id: null, todoInput:  ''}
-    ]
+    todos: [],
+    error: null,
+    loading: true
 }
 
 export const GlobalContext = createContext(initialState)
 export const TodoProvider   = ({children}) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
-    function addTodo (todo) {
-        dispatch({
-            type:       'ADD_TODO',
-            payload:    todo
-        })
+    async function getTodo() {
+        try {
+            axios
+                .get('/api/v3/todos')
+                .then(res => {
+                    dispatch({
+                        type:           'GET_TODO',
+                        payload:        res.data.data
+                    });
+                })
+            
+        } catch (err) {
+            console.log(`fighting to see the error ${err}`)
+        }
     }
-    function deleteTodo (id) {
-        dispatch({
-            type:       'DELETE_TODO',
-            payload:    id
-        })
+    async function addTodo (todo) { 
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        try {
+            axios
+                .post('/api/v3/todos', todo, config)
+                .then(res => {
+                    dispatch({
+                        type:       'ADD_TODO',
+                        payload:    res.data.data
+                    })
+                })
+        } catch (err) {
+            console.log(err)
+        }
     }
-    function editTodo (id) {
+    async function deleteTodo (id) {
+        try {
+            axios
+                .delete(`/api/v3/todo/${id}`)
+                .then( res => {
+                    dispatch({
+                        type:       'DELETE_TODO',
+                        payload:    id
+                    })
+                })
+        } catch (err) {
+            console.log(`react side of the delete Error ${err}` )
+        }
+    }
+    async function editTodo (id) {
         dispatch({
             type:       'EDIT_TODO',
             payload:    id
@@ -30,7 +67,7 @@ export const TodoProvider   = ({children}) => {
     }
     return <GlobalContext.Provider value= {
         {todos: state.todos,
-            deleteTodo, addTodo, editTodo}
+            deleteTodo, getTodo, addTodo, editTodo}
     }>
         {children}
     </GlobalContext.Provider>
